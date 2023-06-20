@@ -1,0 +1,401 @@
+/* 
+    - :not 의사클래스
+    - :target 의사클래스
+    - nesting 문법
+    - 변수
+*/
+
+/* 전역 변수로 변수 등록 */
+:root {
+    --primary-color: #4b6043;
+    --main-color: #95bb72;
+    --sub-color: #b3cf99;
+
+    --font-color: #555;
+
+    /* 메인 페이지 메뉴 색 정보 */
+    --active-chapter-bg-color: black;
+    --active-chapter-font-color: white;
+    --inactive-chapter-bg-color: white;
+    --inactive-chapter-font-color: black;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--font-color);
+}
+
+div.container {
+    /* 가로 크기 지정 코드: 1400px */
+    width: 1400px;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    margin: 1rem 0;
+
+    /* 이미지, 학번 이름 엘리먼트 */
+    >div {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        /* 요소 (세로 기준) 가운데 정렬 */
+        align-items: center;
+
+        >span {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        >img {
+            height: 32px;
+            border: none;
+        }
+    }
+
+    >.menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 4px;
+
+
+        z-index: 1;
+
+        align-items: center;
+
+        /* URL fragment에 따른 배경 색 적용 */
+        .active {
+            background-color: var(--main-color);
+            color: white;
+        }
+
+        >div:hover>.subs {
+            max-height: 100vh;
+        }
+
+        >div {
+            >.menu_content {
+                display: flex;
+                flex-direction: column;
+
+                padding: 8px 16px;
+                border-bottom: 1px solid transparent;
+            }
+
+            >.menu_content:hover {
+                border-color: var(--primary-color);
+                transition: all 0.3s ease-in-out;
+            }
+
+            >.subs {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                max-height: 0;
+                transition: all 0.3s ease-in;
+
+                background-color: white;
+                opacity: 0.85;
+
+                /* 매뉴 내부 요소 */
+                >span {
+                    padding: 8px 16px;
+                }
+            }
+
+            >.subs:hover {
+                max-height: inherit;
+            }
+        }
+
+
+    }
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+
+    >.banner {
+        display: flex;
+        flex-direction: row;
+        /* 이미지 배너들을 가운데로 정렬하는 코드 */
+        justify-content: center;
+
+        >div {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    >article {
+        display: grid;
+        grid-template-columns: 2fr 10fr;
+        padding: 4px;
+
+        gap: 8px;
+
+        /* 자주 방문하는 페이지 메뉴 */
+        >.shortcut {
+            display: flex;
+            flex-direction: column;
+
+            >.title {
+                padding: 8px 16px;
+                background-color: var(--sub-color);
+                color: white;
+            }
+
+            >.menu {
+                .active {
+                    background-color: var(--main-color);
+                    color: white;
+                }
+
+                >.menu_content {
+                    padding: 8px 16px;
+
+                    >.subs {
+                        display: flex;
+                        flex-direction: column;
+                        overflow: hidden;
+                        max-height: 0;
+                    }
+                }
+            }
+        }
+
+        /* 일정, 베스트 사진, 추천 영화/만화/책 */
+        >nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            >.chapters {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+
+                >div {
+                    background-color: var(--inactive-chapter-bg-color);
+                    color: var(--inactive-chapter-font-color);
+
+                    padding: 8px 0;
+                }
+
+                >div.active {
+                    background-color: var(--active-chapter-bg-color);
+                    color: var(--active-chapter-font-color);
+                }
+            }
+
+            >.articles {
+
+                /* 네비게이션 코드 */
+                >article:not(.active) {
+                    display: none;
+                }
+            }
+
+            /* "친구들" 목록 */
+            >.friends {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+
+                >.title {
+                    font-size: 1.5rem;
+                }
+
+                >.friend-list {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                    gap: 48px;
+
+                    >.friend-profile {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+
+                        >.friend-card {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            gap: 6px;
+
+                            padding: 16px 32px;
+                            border: 2px solid grey;
+                            border-radius: 16px;
+                            box-shadow: 0 4px 1rem grey;
+
+                            >img {
+                                aspect-ratio: 1/1;
+                                width: 64px;
+                            }
+
+                            >.name {
+                                font-weight: bold;
+                                font-size: 0.75rem;
+                            }
+
+                            >.desc {
+                                opacity: 0.7;
+                                font-size: 0.75rem;
+                            }
+                        }
+
+                        >.desc {
+                            opacity: 0.7;
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+#sub1 {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    gap: 16px;
+    text-align: left;
+
+    padding: 8px 0;
+
+    >div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    >div:nth-child(1) {
+        font-size: 0.75rem;
+
+        >img {
+            width: 100%;
+        }
+    }
+
+    >div:nth-child(2) {
+        >img {
+            width: 100%;
+        }
+    }
+}
+
+#sub2 {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    gap: 16px;
+    text-align: left;
+
+    padding: 8px 0;
+
+
+    >div:nth-child(1) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        font-size: 0.75rem;
+
+        >img {
+            width: 100%;
+        }
+    }
+
+    >div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        >section {
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+            gap: 16px;
+
+            >img {
+                width: 100%;
+            }
+
+            .title {
+                font-size: 1.125rem;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+
+    /* 네비게이션 간의 간격 */
+    --content-gap: 28px;
+
+    >.contents {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: var(--content-gap);
+
+        background-color: #666;
+        color: #ccc;
+        padding: 4px;
+
+        :after {
+            content: "|";
+            padding-left: var(--content-gap);
+        }
+    }
+
+    >.banner {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        background-color: black;
+        color: white;
+
+        >div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            place-items: center;
+
+            width: 1400px;
+
+            >img {
+                height: 48px;
+            }
+
+            /* SNS 로고 이미지 */
+            >div {
+                display: flex;
+                flex-direction: row;
+                gap: 8px;
+
+                >img {
+                    aspect-ratio: 1/1;
+                    width: 32px;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+}
