@@ -222,6 +222,12 @@ header {
                 >article:nth-child(1) {
                     text-align: left;
 
+                    /* un-ordered list의 기본 margin 제거 */
+                    >ul {
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    }
+
                     .date-highlight {
                         color: var(--main-color);
                     }

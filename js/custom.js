@@ -333,3 +333,28 @@ window.addEventListener("DOMContentLoaded", () => {
         setModalVisibleity(false);
     });
 });
+
+// 레이아웃 시프트 방지를 위한 chapter 크기 측정 및 교정
+window.addEventListener("DOMContentLoaded", () => {
+    const chapters = document.querySelectorAll(
+        "#main > div > article > nav > div.chapters > div"
+    );
+
+    const articles = document.querySelectorAll(
+        "#main > div > article > nav > div.articles > article"
+    );
+
+    const articlesMaxHeight = [...articles].slice(1).reduce((acc, cur) => {
+        cur.classList.add("active");
+        const currentClientHeight = cur.clientHeight;
+        cur.classList.remove("active");
+        return currentClientHeight < acc ? acc : currentClientHeight;
+    }, articles[0].clientHeight);
+
+    console.log(articlesMaxHeight);
+
+    articles.forEach((element) => {
+        // @ts-ignore
+        element.style.minHeight = `${articlesMaxHeight}px`;
+    });
+});
