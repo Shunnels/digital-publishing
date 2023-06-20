@@ -213,6 +213,24 @@ header {
 
             >.articles {
 
+                /* Best Photo 5 */
+                >article:nth-child(2) {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+
+                    >.photo-card {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+
+                        >img {
+                            width: 128px;
+                            aspect-ratio: 1/1;
+                        }
+                    }
+                }
+
                 /* 네비게이션 코드 */
                 >article:not(.active) {
                     display: none;
