@@ -128,12 +128,24 @@ header {
     gap: 4px;
 
     >.banner {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 9fr 3fr;
         /* 이미지 배너들을 가운데로 정렬하는 코드 */
         justify-content: center;
 
-        >div {
+        >div:nth-child(1) {
+            overflow: hidden;
+
+            /* 이미지 리스트가 담긴 슬라이드 */
+            >div {
+                display: flex;
+                flex-direction: row;
+                transition: all 1s linear;
+
+            }
+        }
+
+        >div:nth-child(2) {
             display: flex;
             flex-direction: column;
         }

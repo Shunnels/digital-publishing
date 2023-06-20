@@ -82,6 +82,40 @@ window.addEventListener("DOMContentLoaded", () => {
     setInterval(_interval, 1000 / 30);
 });
 
+// 이미지 슬라이드 구현
+window.addEventListener("DOMContentLoaded", () => {
+    const slideImage = () => {
+        // 이미지 컴포넌트 배열
+        const banners = [
+            ...document.querySelectorAll(
+                "#main > div > div > div:nth-child(1) > div > img"
+            ),
+        ];
+        // 이미지 가로 크기 추출
+        const imageWidths = banners.map((element) => element.clientWidth);
+        // 이미지 프레임 컴포넌트
+        const imageFrame = document.querySelector(
+            "#main > div > div > div:nth-child(1) > div"
+        );
+
+        if (!imageFrame) return;
+        // data-image-index 지정
+        const imageIndex =
+            Number(imageFrame.getAttribute("data-image-index")) || 0;
+        const nextImageIndex = (imageIndex + 1) % banners.length;
+
+        // NOTE: 각각의 이미지를 구분해 밀어낼 공간
+        let frameOffset = 0;
+        for (let i = 0; i < nextImageIndex; i++) frameOffset += imageWidths[i];
+
+        // @ts-ignore
+        imageFrame.style.transform = `translateX(-${frameOffset}px)`;
+    };
+
+    // 시간별 슬라이더 적용
+    setInterval(slideImage, 1000);
+});
+
 // 레이아웃 시프트 방지를 위한 코드
 window.addEventListener("DOMContentLoaded", () => {
     const menuDivs = [
