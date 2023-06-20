@@ -110,10 +110,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // @ts-ignore
         imageFrame.style.transform = `translateX(-${frameOffset}px)`;
+
+        imageFrame.setAttribute("data-image-index", String(nextImageIndex));
     };
 
     // 시간별 슬라이더 적용
-    setInterval(slideImage, 1000);
+    setInterval(slideImage, 5000);
 });
 
 // 레이아웃 시프트 방지를 위한 코드
