@@ -86,7 +86,6 @@ header {
         }
 
         >div {
-
             >.menu_content {
                 display: flex;
                 flex-direction: column;
@@ -177,6 +176,59 @@ header {
             }
 
             >.menu {
+                >div {
+                    display: flex;
+                    flex-direction: column;
+
+                    /* 트릭 */
+                    >.menu_content:nth-child(1) {
+                        background-color: var(--main-color);
+                    }
+
+                    >.menu_content>span:hover {
+                        border-bottom: 1px solid var(--primary-color);
+                    }
+
+                    >.menu_content:hover {
+                        >.subs {
+                            max-height: 100vh;
+                        }
+                    }
+
+                    >.menu_content {
+                        display: flex;
+                        flex-direction: column;
+
+                        color: white;
+                        background-color: var(--sub-color);
+
+                        >span {
+                            border-bottom: 1px solid transparent;
+                            transition: all 0.3s ease-in-out;
+
+                            padding: 8px 16px;
+                        }
+
+                        >.subs {
+                            display: flex;
+                            flex-direction: column;
+
+                            background-color: white;
+                            color: #555;
+
+                            overflow: hidden;
+                            max-height: 0vh;
+
+                            transition: all 1s ease-in-out;
+
+                            >span {
+                                padding: 8px 16px;
+                            }
+                        }
+                    }
+                }
+
+
                 >.menu_content.active {
                     background-color: var(--main-color);
                     color: white;
