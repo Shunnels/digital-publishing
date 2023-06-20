@@ -60,8 +60,10 @@
                     </div>
                 </div>
                 <div>
-                    <img src="./assets/main_2.jpg" alt="">
-                    <img src="./assets/main_3.jpg" alt="">
+                    <img data-modal-image-url="./assets/modal_img.jpg"
+                        data-modal-desc="아직 저는 마땅한 작품이 없습니다...<br />차츰 채워가도록 할게요!" src="./assets/main_2.jpg" alt="">
+                    <img data-modal-image-url="./assets/modal_img.jpg"
+                        data-modal-desc="아직 저는 마땅한 작품이 없습니다...<br />차츰 채워가도록 할게요!" src="./assets/main_3.jpg" alt="">
                 </div>
             </div>
 
@@ -303,6 +305,22 @@
             </div>
         </div>
     </footer>
+
+    <div class="modal-bg-frame" style="display: none;"></div>
+
+    <div class=" image-modal-wrapper" style="display: none;">
+        <div class="image-modal">
+            <article>
+                <img src="" alt="">
+                <div>
+                    <span class="desc"></span>
+                    <div class="button-frame">
+                        <button>닫기</button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
 
     <script src="./js/custom.js"></script>
 </body>

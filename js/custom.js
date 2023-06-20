@@ -2,6 +2,63 @@
 
 const ids = ["main", "sub1", "sub2"];
 
+// 모달창 관련 설정
+const modalWrapperElement = document.querySelector(
+    "body > div.image-modal-wrapper"
+);
+const modalBackgroundElement = document.querySelector(
+    "body > div.modal-bg-frame"
+);
+const modalImgElement = document.querySelector(
+    "body > div.image-modal-wrapper > div > article > img"
+);
+const modalDescElement = document.querySelector(
+    "body > div.image-modal-wrapper > div > article > div > span"
+);
+// 모달창 닫기 버튼 이벤트 바인딩
+const modalCloseBtnElement = document.querySelector(
+    "body > div.image-modal-wrapper > div > article > div > div > button"
+);
+
+/**
+ * 모달창의 이미지 URL을 지정하는 함수
+ * @type {(url: string) => void}
+ */
+const setModalImgUrl = (url) => modalImgElement?.setAttribute("src", url);
+/**
+ * 모달창의 description 항목을 지정하는 함수
+ * @type {(desc: string) => void}
+ */
+const setModalDesc = (desc) =>
+    void (modalDescElement && (modalDescElement.innerHTML = desc));
+
+/** @type {(visibility: boolean) => void} */
+const setModalVisibleity = (visibility) => {
+    if (!(modalWrapperElement && modalBackgroundElement)) return;
+    switch (visibility) {
+        case true:
+            // @ts-ignore
+            modalWrapperElement.style.display = "inherit";
+            // @ts-ignore
+            modalBackgroundElement.style.display = "inherit";
+            break;
+        case false:
+            // @ts-ignore
+            modalWrapperElement.style.display = "none";
+            // @ts-ignore
+            modalBackgroundElement.style.display = "none";
+            break;
+    }
+};
+/**
+ * 모달창의 시각화 여부를 반환합니다.
+ * @description 반환값이 true라면 보임 상태, 반환값이 false라면 숨김 상태입니다.
+ * @type {() => boolean}
+ */
+const getModalVisibility = () =>
+    // @ts-ignore
+    !(modalWrapperElement?.style.display !== "none");
+
 /** @type {(url: string) => string} */
 const urlNavigate = (url) => url.replace(/^#/, "");
 /** @type {() => string} */
@@ -230,4 +287,49 @@ window.addEventListener("DOMContentLoaded", () => {
     // @ts-ignore
     // NOTE: 기본적으로 첫번째 쳅터를 활성화 시키기 위한 코드
     Chapters[0].click();
+});
+
+// 모달창 활성화 처리
+// data-modal-image-url: 이미지 URL
+// data-modal-desc: 모달 내용
+// 둘 모두를 가진 엘리먼트에 대해 클릭 시, 자동으로 모달창을 띄우도록 코드를 작성합니다.
+window.addEventListener("DOMContentLoaded", () => {
+    const modalAttactedElements = [
+        ...document.querySelectorAll("[data-modal-image-url][data-modal-desc]"),
+    ];
+
+    modalAttactedElements.forEach((element) => {
+        const imageUrl = element.getAttribute("data-modal-image-url") || "";
+        const desc = element.getAttribute("data-modal-desc") || "";
+
+        element.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            setModalImgUrl(imageUrl);
+            setModalDesc(desc);
+            setModalVisibleity(true);
+        });
+    });
+});
+
+// 모달창 '닫기' 버튼 클릭 이벤트 바인딩
+// + wrapper element 클릭 시, 모달창 비활성화 하도록 바인딩
+window.addEventListener("DOMContentLoaded", () => {
+    if (!modalCloseBtnElement) return;
+    if (!modalWrapperElement) return;
+
+    // 닫기 버튼
+    modalCloseBtnElement.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setModalVisibleity(false);
+    });
+
+    // 바탕
+    modalWrapperElement.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setModalVisibleity(false);
+    });
 });
