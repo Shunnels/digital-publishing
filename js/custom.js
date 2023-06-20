@@ -118,7 +118,7 @@ window.addEventListener("DOMContentLoaded", () => {
     setInterval(slideImage, 5000);
 });
 
-// 레이아웃 시프트 방지를 위한 코드
+// 메뉴바의 레이아웃 시프트 방지를 위한 코드
 window.addEventListener("DOMContentLoaded", () => {
     const menuDivs = [
         ...document.querySelectorAll(
@@ -131,6 +131,25 @@ window.addEventListener("DOMContentLoaded", () => {
         // @ts-ignore
         element.style.height = `${element.clientHeight}px`;
     });
+});
+
+// 슬라이더 이미지 높이 고정 코드
+// 두번째 flex로 구성된 이미지 레이아웃의 높이를 참조하여 높이 값을 새롭게 계산, 적용합니다.
+window.addEventListener("DOMContentLoaded", () => {
+    const bannerElement = document.querySelector("#main > div > div");
+    const secondBannerElement = document.querySelector(
+        "#main > div > div > div:nth-child(2)"
+    );
+
+    if (!bannerElement || !secondBannerElement) return;
+
+    const heightSum = [...secondBannerElement.children].reduce(
+        (acc, cur) => acc + cur.clientHeight,
+        0
+    );
+
+    // @ts-ignore
+    bannerElement.style.height = `${heightSum}px`;
 });
 
 // "자주 방문하는 페이지" 활성화/비활성화 코드
