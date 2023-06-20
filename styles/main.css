@@ -7,17 +7,14 @@
 
 /* 전역 변수로 변수 등록 */
 :root {
-    --primary-color: #4b6043;
-    --main-color: #95bb72;
-    --sub-color: #b3cf99;
+    --primary-color: #6d1371;
+    --main-color: #982286;
+    --sub-color: #cd8ec0;
+
+    --chapter-active-color: #a84296;
+    --chapter-base-color: #e1bbd9;
 
     --font-color: #555;
-
-    /* 메인 페이지 메뉴 색 정보 */
-    --active-chapter-bg-color: black;
-    --active-chapter-font-color: white;
-    --inactive-chapter-bg-color: white;
-    --inactive-chapter-font-color: black;
 }
 
 body {
@@ -67,6 +64,8 @@ header {
         grid-template-columns: 1fr 1fr 1fr;
         gap: 4px;
 
+        background-color: var(--sub-color);
+        color: white;
 
         z-index: 1;
 
@@ -75,11 +74,11 @@ header {
         /* URL fragment에 따른 배경 색 적용 */
         .active {
             background-color: var(--main-color);
-            color: white;
         }
 
         >div:hover>.subs {
             max-height: 100vh;
+            color: black;
         }
 
         >div {
@@ -169,18 +168,20 @@ header {
 
             >.title {
                 padding: 8px 16px;
-                background-color: var(--sub-color);
-                color: white;
+                color: black;
             }
 
             >.menu {
-                .active {
+                >.menu_content.active {
                     background-color: var(--main-color);
                     color: white;
                 }
 
                 >.menu_content {
                     padding: 8px 16px;
+
+                    background-color: var(--sub-color);
+                    color: white;
 
                     >.subs {
                         display: flex;
@@ -203,15 +204,15 @@ header {
                 grid-template-columns: 1fr 1fr 1fr;
 
                 >div {
-                    background-color: var(--inactive-chapter-bg-color);
-                    color: var(--inactive-chapter-font-color);
+                    background-color: var(--chapter-base-color);
+                    color: white;
 
                     padding: 8px 0;
                 }
 
                 >div.active {
-                    background-color: var(--active-chapter-bg-color);
-                    color: var(--active-chapter-font-color);
+                    background-color: var(--chapter-active-color);
+                    color: white;
                 }
             }
 
