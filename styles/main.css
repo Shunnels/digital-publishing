@@ -217,6 +217,15 @@ header {
 
             >.articles {
 
+                /* 6월 일정 */
+                >article:nth-child(1) {
+                    text-align: left;
+
+                    .date-highlight {
+                        color: var(--main-color);
+                    }
+                }
+
                 /* Best Photo 5 */
                 >article:nth-child(2) {
                     display: flex;
