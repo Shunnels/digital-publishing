@@ -81,7 +81,12 @@ header {
             color: black;
         }
 
+        >div:nth-child(1)>.menu_content {
+            background-color: var(--main-color);
+        }
+
         >div {
+
             >.menu_content {
                 display: flex;
                 flex-direction: column;
